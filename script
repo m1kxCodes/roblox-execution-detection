@@ -1,1 +1,115 @@
-adsasdasdasd
+-------------------------------------------------------- COPY AND EDIT TO YOUR PREFRENCE
+
+local gameName = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
+local detectedExecutor = "Unknown"
+
+local function detectExecutor()
+    if syn then
+        detectedExecutor = "Synapse X"
+    elseif getexecutorname then
+        detectedExecutor = getexecutorname()
+    elseif KRNL_LOADED then
+        detectedExecutor = "KRNL"
+    elseif is_sirhurt_closure then
+        detectedExecutor = "SirHurt"
+    elseif fluxus then
+        detectedExecutor = "Fluxus"
+    elseif WRDAPI then
+        detectedExecutor = "WeAreDevs API"
+    elseif Forlon then
+        detectedExecutor = "Forlon API"
+    elseif identifyexecutor then
+        detectedExecutor = identifyexecutor()
+    elseif _G.ExecutorName then
+        detectedExecutor = _G.ExecutorName
+    elseif is_fluxus_closure then
+        detectedExecutor = "Fluxus (Closure)"
+    elseif PROTOSMASHER_LOADED then
+        detectedExecutor = "ProtoSmasher"
+    elseif Shadow then
+        detectedExecutor = "Shadow"
+    elseif Electron then
+        detectedExecutor = "Electron"
+    elseif Calamari then
+        detectedExecutor = "Calamari API"
+    elseif Skiylua then
+        detectedExecutor = "Skiylua"
+    elseif ScriptWare then
+        detectedExecutor = "Script-Ware"
+    elseif Swen then
+        detectedExecutor = "Swen"
+    elseif Elysian then
+        detectedExecutor = "Elysian"
+    elseif Comet then
+        detectedExecutor = "Comet"
+    elseif Kiwi then
+        detectedExecutor = "Kiwi X"
+    elseif Oxygen then
+        detectedExecutor = "Oxygen U"
+    elseif Arceus then
+        detectedExecutor = "Arceus X"
+    elseif JJSploit then
+        detectedExecutor = "JJSploit API"
+    elseif GravitySwitch then
+        detectedExecutor = "Gravity Switch"
+    elseif CocoHub then
+        detectedExecutor = "CocoHub API"
+    elseif Venom then
+        detectedExecutor = "Venom X"
+    elseif Galaxy then
+        detectedExecutor = "Galaxy"
+    elseif Inception then
+        detectedExecutor = "Inception"
+    elseif ElectronV2 then
+        detectedExecutor = "Electron V2"
+    elseif Zynapse then
+        detectedExecutor = "Zynapse"
+    elseif Axon then
+        detectedExecutor = "Axon API"
+    else
+        detectedExecutor = "Unknown Executor"
+    end
+end
+
+detectExecutor()
+
+function SendMessage(url, message)
+    local http = game:GetService("HttpService")
+    local headers = { ["Content-Type"] = "application/json" }
+    local data = { ["content"] = message }
+    local body = http:JSONEncode(data)
+    request({ Url = url, Method = "POST", Headers = headers, Body = body })
+    print("Sent")
+end
+
+function SendMessageEMBED(url, embed)
+    local http = game:GetService("HttpService")
+    local headers = { ["Content-Type"] = "application/json" }
+    local data = {
+        ["embeds"] = {
+            {
+                ["title"] = embed.title,
+                ["description"] = embed.description,
+                ["color"] = embed.color,
+                ["fields"] = embed.fields,
+                ["footer"] = { ["text"] = embed.footer.text }
+            }
+        }
+    }
+    local body = http:JSONEncode(data)
+    request({ Url = url, Method = "POST", Headers = headers, Body = body })
+end
+
+local url = "WEBHOOK" -- REPLACE WITH YOUR ACTUAL WEBHOOK
+
+local embed = {
+    ["title"] = "PLAYER EXECUTED",
+    ["description"] = "cool_seagulls Aimbot",
+    ["color"] = 13835378,
+    ["fields"] = {
+        { ["name"] = "INFO", ["value"] = "executed by " .. player.Name .. "\nexecutor is " .. detectedExecutor .. "\nexecuted in " .. gameName .. "\n" .. game.PlaceId }
+    },
+    ["footer"] = { ["text"] = "cool_seagull's Universal Aimbot" }
+}
+
+SendMessageEMBED(url, embed)
